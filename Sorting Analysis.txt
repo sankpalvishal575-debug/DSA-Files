@@ -1,0 +1,109 @@
+Bubble Sort
+A. Method
+let arr=[7,11,9,2,17,4]
+1st pass: 7 11 9 2 17 4 -> 0,1 index
+          7 9 11 2 17 4 -> 1,2 index
+          7 9 2 11 17 4 -> 2,3 index
+          7 9 2 11 17 4 -> 3,4 index
+          7 9 2 11 4 17 -> 4,5 index
+
+2nd pass: 7 9 2 11 4 17 -> 0,1 index
+          7 2 9 11 4 17 -> 1,2 index
+          7 2 9 11 4 17 -> 2,3 index
+          7 2 9 4 11 17 -> 3,4 index
+
+3rd pass: 2 7 9 4 11 17 -> 0,1 index
+          2 7 9 4 11 17 -> 1,2 index
+          2 7 4 9 11 17 -> 2,3 index
+
+4th pass: 2 7 4 9 11 17 -> 0,1 index
+          2 4 7 9 11 17 -> 1,2 index
+
+5th pass: 2 4 7 9 11 17 -> 0,1 index Final sorted array
+
+B. Analysis
+1. Time Complexity: O(n^2) if not sorted/ O(n) if sorted
+2. Stable Algorithm
+3. Not adaptive by nature but can be made adaptive
+
+Insertion Sort
+A. Method
+let arr=[7,12,3,4,1]
+       S<-|->NS
+Step 1: 7 | 12 3 4 1
+Now insert 12 in the sorted array such that the array till 12 is sorted
+Here 1 possible comparison
+
+          S<-|->NS
+Step 2: 7 12 | 3 4 1
+Now insert 3 in such a way that array is sorted till 3
+Here 2 possible comparison
+
+            S<-|->NS
+Step 3: 3 7 12 | 4 1
+Now repeat the same for insertion of 4
+Here 3 possible comparison
+
+              S<-|->NS
+Step 4: 3 4 7 12 | 1
+Now finally do it for insertion of 1
+Here 4 possible comparison
+
+Final answer: 1 3 4 7 12 this is the sorted array
+Here 5 possible comparison
+
+B. Analysis
+1. Time Complexity: O(n^2) for unsorted/ O(n) for sorted
+2. Stable Algorithm
+3. Adaptive by nature
+
+Selection Sort
+A. Method
+let arr={8,0,7,1,3}
+here we assume the first number as the smallest number, then we traverse to find if smaller number exists or not. After that we sort the array till index 0 in 1st pass. We repeat the same process till we have sorted the 4th element in an array of length 5.
+            |->NS
+1st pass: 0 | 8 7 1 3
+              |->NS
+2nd pass: 0 1 | 7 8 3
+                |->NS
+3rd pass: 0 1 3 | 8 7 
+4th pass: 0 1 3 7 8
+
+B. Analysis
+1. Time Complexity: O(n^2) 
+2. Not Stable Algorithm
+3. Not Adaptive Algorithm
+
+Quick Sort
+A. Method
+let arr={2,4,3,9,1,4,8,7,5,6}
+Pivot: first element or arr[0]
+Partioning:-
+1. i=low, j=high, pivot=low
+2. i++ until element>=pivot is found
+3. j-- until element<=pivot is found
+4. Swap arr[i], arr[j] and repeat 2,3 until j<=i 
+5. Swap pivot and arr[j]
+
+B. Analysis
+1. Time Complexity
+Worst case (already sorted): O(n^2)
+Best Case: O(nlog(n))
+2. Not a stable Algorithm
+3. Is a inplace Algorithm
+
+Merge Sort
+A. Method
+1. The idea is to break the array in two equal parts i.e around mid and the merge the two arrays in a new one. 
+2. For the sorting part we use recursive function call while for merging we use if-else and loops. Basically we compare each element of first array with the second array and then add them in the new array accordingly
+
+Count Sort
+A. Method
+1. Find the max value element in given array
+2. Create an array of size max value viz count array. Then for each value in given array increment 1 in the count array at that where value==index
+3. Now traverse through count array such that if element is 0 the counter++, else copy index back in original array and decrement the value in count array
+
+B. Analysis
+1. Extra Space
+2. Time Complexity: O(m+n)
+3. One of the fastest algorithms for sorting
