@@ -69,35 +69,24 @@ int performOperation(int op1, int op2, char operator) {
 int evaluatePostfix(char postfix[]) {
     int i, operand1, operand2, result;
     char c;
-    
     for(i = 0; i < strlen(postfix); i++) {
         c = postfix[i];
-        
-        // If operand (digit), push to stack
         if(isdigit(c)) {
-            push(c - '0');  // Convert char digit to int
-        }
-        
-        // If operator, pop two operands and perform operation
-        else if(isOperator(c)) {
-            if(top < 1) {  // Need at least 2 operands
+            push(c - '0'); 
+        }else if(isOperator(c)) {
+            if(top < 1) {  
                 printf("Invalid expression\n");
                 return 0;
             }
-            
-            operand2 = pop();  // Second operand (top of stack)
-            operand1 = pop();  // First operand
-            
+            operand2 = pop();  
+            operand1 = pop();  
             result = performOperation(operand1, operand2, c);
             push(result);
         }
     }
-    
-    // Final result should be the only element in stack
     if(top == 0) {
         return pop();
-    }
-    else {
+    }else{
         printf("Invalid expression\n");
         return 0;
     }
