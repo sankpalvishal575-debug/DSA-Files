@@ -7,7 +7,8 @@ struct Node
     struct Node* next;
 };
 
-void display(struct Node* ptr){
+void display(struct Node* head){
+    struct Node* ptr=head->next;
     while(ptr!=NULL){
         printf("%d\t",ptr->data);
         ptr = ptr->next;
@@ -15,16 +16,16 @@ void display(struct Node* ptr){
 }
 
 struct Node* deleteAtFirst(struct Node* head){
-    struct Node* ptr=head;
-    head=head->next;
+    struct Node* ptr=head->next;
+    head->next=ptr->next;
     free(ptr);
     return head;
 }
 
 struct Node* deleteAtIndex(struct Node* head,int index){
-    struct Node* p=head;
-    struct Node* q=head->next;
-    for(int i=0;i<index-1;i++){
+    struct Node* p=head->next;
+    struct Node* q=p->next;
+    for(int i=1;i!=index-1;i++){
         q=q->next;
         p=p->next;
     }
@@ -34,8 +35,8 @@ struct Node* deleteAtIndex(struct Node* head,int index){
 }
 
 struct Node* deleteAtEnd(struct Node* head){
-    struct Node* p=head;
-    struct Node* q=head->next;
+    struct Node* p=head->next;
+    struct Node* q=p->next;
     while(q->next!=NULL){
         q=q->next;
         p=p->next;
@@ -46,44 +47,50 @@ struct Node* deleteAtEnd(struct Node* head){
 }
 
 int main(){
-    //Creating a Linked List
     struct Node* head;
+    struct Node* first;
     struct Node* second;
     struct Node* third;
     struct Node* fourth;
     struct Node* fifth;
 
-    //Allocation of memory for nodes in heap;
     head=(struct Node*)malloc(sizeof(struct Node));
     second=(struct Node*)malloc(sizeof(struct Node));
     third=(struct Node*)malloc(sizeof(struct Node));
     fourth=(struct Node*)malloc(sizeof(struct Node));
     fifth=(struct Node*)malloc(sizeof(struct Node));
 
-    //Linking First Node to Second
-    head->data=7;
-    head->next=second;
-
-    //Linking Second Node to Third
+    head->next=first;
+    first->data=7;
+    first->next=second;
     second->data=8;
     second->next=third;
-
-    //Linking Third node to Fourth
     third->data=11;
     third->next=fourth;
-    
-    //Linking Fourth node to Fifth
     fourth->data=121;
     fourth->next=fifth;
-
-    //Terminating Linked List
     fifth->data=144;
     fifth->next=NULL;
 
-    printf("Linked List before deletion:- \n");
-    display(head);
-    head=deleteAtIndex(head,3);
-    printf("\nLinked List after deletion:- \n");
-    display(head);
+    int choice,i;
+    while(1){
+        printf("Enter\n1 for Delete at Begining\n2 for Delete at Index\n3 for Delete at End\n4 for Display\n5 for EXIT\n");
+        scanf("%d",&choice);
+        switch(choice){
+            case 1: deleteAtFirst(head);
+                    break;
+            case 2: printf("Enter index: ");
+                    scanf("%d",&i);
+                    deleteAtIndex(head,i);
+                    break;
+            case 3: deleteAtEnd(head);
+                    break;
+            case 4: display(head);
+                    break;
+            case 5: exit(0);
+                    break;
+            default: printf("Invalid Input\n");
+        }
+    }
     return 0;
 }
