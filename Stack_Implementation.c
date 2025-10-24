@@ -54,29 +54,40 @@ int peek(struct stack* sp,int i){
     }
 }
 
+void display(struct stack* sp){
+    int i=sp->top;
+    while(i!=-1){
+        printf("%d\t",sp->arr[i]);
+        i--;
+    }
+}
+
 int main(){
+    int val,choice,i;
     struct stack* sp =(struct stack*)malloc(sizeof(struct stack*));
     sp->top=-1;
     sp->size=10;
     sp->arr= (int*)malloc(sp->size*sizeof(int));
-    printf("Testing functions:-\n");
-    printf("%d\n",isFull(sp));
-    printf("%d\n",isEmpty(sp));
-    for(int i=1;i<=sp->size;i++){
-        push(sp,i);
-    }
-    printf("After push:-\n");
-    printf("%d\n",isFull(sp));
-    printf("%d\n",isEmpty(sp));
-    for(int i=1;i<=5;i++){
-        pop(sp);
-    }
-    printf("After pop:-\n");
-    printf("%d\n",isFull(sp));
-    printf("%d\n",isEmpty(sp));
-    printf("Testing peek opreation:-\n");
-    for(int i=sp->top+1;i>=1;i--){
-        printf("%d\t",peek(sp,i));
+    while(1){
+        printf("Enter\n1 for Push\n2 for Pop\n3 for peek\n4 for Display\n5 for EXIT\n");
+        scanf("%d",&choice);
+        switch(choice){
+            case 1: printf("Enter the value to be inserted: ");
+                    scanf("%d",&val);
+                    push(sp,val);
+                    break;
+            case 2: pop(sp);
+                    break;
+            case 3: printf("Enter index from the top: ");
+                    scanf("%d",&i);
+                    printf("Value at index from the top: %d\n",peek(sp,i));
+                    break;
+            case 4: display(sp);
+                    break;
+            case 5: exit(0);
+                    break;
+            default:printf("Invalid Choice\n"); 
+        }
     }
     return 0;
 }
