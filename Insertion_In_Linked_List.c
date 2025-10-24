@@ -7,18 +7,21 @@ struct Node
     struct Node* next;
 };
 
-void display(struct Node* ptr){
+void display(struct Node* head){
+    struct Node* ptr=head->next;
     while(ptr!=NULL){
         printf("%d\t",ptr->data);
         ptr = ptr->next;
     }
+    printf("\n");
 }
 
 struct Node* insertAtFirst(struct Node* head, int data){
     struct Node* ptr=(struct Node*)malloc(sizeof(struct Node*));
-    ptr->next=head;
+    ptr->next=head->next;
+    head->next=ptr;
     ptr->data=data;
-    return ptr;
+    return head;
 }
 
 struct Node* insertAtIndex(struct Node* head, int data,int index){
@@ -48,50 +51,33 @@ struct Node* insertAtEnd(struct Node* head, int data){
 }
 
 int main(){
-    //Creating a Linked List
     struct Node* head;
-    struct Node* second;
-    struct Node* third;
-    struct Node* fourth;
-    struct Node* fifth;
-
-    //Allocation of memory for nodes in heap;
-    head=(struct Node*)malloc(sizeof(struct Node));
-    second=(struct Node*)malloc(sizeof(struct Node));
-    third=(struct Node*)malloc(sizeof(struct Node));
-    fourth=(struct Node*)malloc(sizeof(struct Node));
-    fifth=(struct Node*)malloc(sizeof(struct Node));
-
-    //Linking First Node to Second
-    head->data=7;
-    head->next=second;
-
-    //Linking Second Node to Third
-    second->data=8;
-    second->next=third;
-
-    //Linking Third node to Fourth
-    third->data=11;
-    third->next=fourth;
-    
-    //Linking Fourth node to Fifth
-    fourth->data=121;
-    fourth->next=fifth;
-
-    //Terminating Linked List
-    fifth->data=144;
-    fifth->next=NULL;
-
-    printf("Linked List before insetion:- \n");
-    display(head);
-    head=insertAtFirst(head,69);
-    printf("\n Linked List after insetion at first:- \n");
-    display(head);
-    head=insertAtIndex(head,70,3);
-    printf("\n Linked List after insetion at index:- \n");
-    display(head);
-    head=insertAtEnd(head,71);
-    printf("\n Linked List after insetion at end:- \n");
-    display(head);
+    head->next=NULL;
+    int val[3],choice,i;
+    while(1){
+        printf("Enter\n1 for Insert at Begining\n2 for Insert at Index\n3 for Insert at End\n4 for Display\n5 for EXIT\n");
+        scanf("%d",&choice);
+        switch(choice){
+            case 1: printf("Enter value to be inserted: ");
+                    scanf("%d",&val[0]);
+                    insertAtFirst(head,val[0]);
+                    break;
+            case 2: printf("Enter value to be inserted: ");
+                    scanf("%d",&val[1]);
+                    printf("Enter index: ");
+                    scanf("%d",&i);
+                    insertAtIndex(head,val[1],i);
+                    break;
+            case 3: printf("Enter value to be inserted: ");
+                    scanf("%d",&val[2]);
+                    insertAtEnd(head,val[2]);
+                    break;
+            case 4: display(head);
+                    break;
+            case 5: exit(0);
+                    break;
+            default: printf("Invalid Input\n");
+        }
+    }
     return 0;
 }
