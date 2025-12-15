@@ -5,7 +5,6 @@ int linearSearch(int* arr,int n,int search){
     for(int i=0;i<n;i++){
         if(arr[i]==search){
             return 1;
-            break;
         }
     }
     return -1;
@@ -90,4 +89,5 @@ int main(){
         printf("Element not found\n");
     }
     return 0;
+
 }
